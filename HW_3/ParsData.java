@@ -1,46 +1,39 @@
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class ParsData {
 
-    public static String[] parse(String[] arr) {
+  public static String[] parsedData(String[] arr) throws ParseException {
+    parseDateOfBirth(arr[3]);
+    parsePhoneNumber(arr[4]);
+    parseGender(arr[5]);
+    return arr;
+  }
 
-        for (int i = 0; i <= 3; i++) {
-
-            if (arr[i] == "[0-9]") {
-                throw new NumberFormatException("неверный формат, соержит цифры");
-            } else return arr;
-        }
-
-        // SimpleDateFormat format = new SimpleDateFormat("dd.mm.yyyy");
-        // Date birthDate;
-        // try {
-        //     birthDate = DateFormat(arr[3]);
-        // }catch (ParseException e){
-        //     throw new ParseException("Неверный формат даты рождения", e.getErrorOffset());
-        // }
-        
-        try {
-            SimpleDateFormat format = new SimpleDateFormat("dd.mm.yyyy");
-            Date birthDate = (Date) format.parse(arr[3]);            
-            return arr;            
-        } catch (ParseException ex) {
-            ex.printStackTrace();
-
-        int phoneNumber;
-        try {
-            phoneNumber = Integer.parseInt(arr[4]);
-        }catch (NumberFormatException e){
-            throw new NumberFormatException("Неверный формат телефона");
-        }
-
-        String sex = arr[5];
-            if (!sex.toLowerCase().equals("m") && !sex.toLowerCase().equals("f")){
-            throw new RuntimeException("Неверно введен пол");
-        }
-
-        return arr;
+  private static LocalDate parseDateOfBirth(String birthDate) throws ParseException {
+    try {
+      return LocalDate.parse(birthDate, DateTimeFormatter.ofPattern("dd.MM.yyyy"));
+    } catch (Exception e) {
+      throw new NumberFormatException("Неверный формат даты рождения");
     }
-}
+  }
+
+  private static long parsePhoneNumber(String phoneNumber) throws ParseException {
+    try {
+      return Long.parseLong(phoneNumber);
+    } catch (NumberFormatException e) {
+      throw new NumberFormatException("Неверный формат номера телефона");
+    }
+  }
+
+  private static String parseGender(String sex) throws ParseException {
+    if (!sex.equals("m") && !sex.equals("f")) {
+      throw new RuntimeException("Неверно введен пол");
+    }
+
+    return sex;    
+  }
 }

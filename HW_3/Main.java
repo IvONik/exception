@@ -25,28 +25,25 @@
 При возникновении проблемы с чтением-записью в файл, исключение должно быть корректно обработано, 
 пользователь должен увидеть стектрейс ошибки.*/
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.text.ParseException;
 import java.util.Scanner;
 
 public class Main {
 
     public static void main(String[] args) {
-        //List<Human> humans = new ArrayList<>();        
 
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Введите, через пробел: Фамилия Имя Отчество датарождения номертелефона пол");
+        String string = scanner.nextLine();
+        String[] parts = string.split(" ");
+
+        Human human = new Human(parts[0], parts[1], parts[2], parts[3], parts[4], parts[5]);
+        // System.out.println(human);
         try {
-            ScannerInput.scanner();
-        } catch (CheckQuantityData e) {           
+            ParsData.parsedData(parts);
+        } catch (ParseException e) {
             e.printStackTrace();
         }
-            
-       //Human human = new Human();
-               
-    
-         
-
+        Writer.write(parts, "parts[0]");
     }
-
-   
 }

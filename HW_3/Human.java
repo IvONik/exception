@@ -6,9 +6,8 @@ public class Human {
     String name;
     String faserName;
     String birthDate;
-    String phoneNumber;   
+    String phoneNumber;
     String sex;
-      
 
     public Human(String surname, String name, String faserName, String birthDate, String phoneNumber, String sex) {
         this.surname = surname;
@@ -23,7 +22,5 @@ public class Human {
     public String toString() {
         return surname + " " + name + " " + faserName + " " + birthDate + " " + phoneNumber + " " + sex;
     }
-    
-        
-    
+
 }
